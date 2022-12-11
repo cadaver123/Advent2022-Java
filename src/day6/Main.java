@@ -18,7 +18,6 @@ public class Main {
         int index = 0;
         String input = lines.get(0);
 
-        outer:
         for (Character letter: input.chars().mapToObj(i -> (Character) (char) i).toList()) {
             String substring = input.substring(repeatedCharIndex, index);
 
