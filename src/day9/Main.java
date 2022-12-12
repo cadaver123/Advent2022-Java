@@ -20,10 +20,6 @@ class Position {
         return Math.sqrt(Math.pow((this.x - other.x), 2) + Math.pow((this.y - other.y), 2));
     }
 
-    public boolean isDiagonal(Position other) {
-        return (this.x - other.x == 0) && (this.y - other.y == 0);
-    }
-
     public Position move(Direction dir) {
         return switch (dir) {
             case Up -> new Position(this.x, this.y + 1);
