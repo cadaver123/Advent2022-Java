@@ -55,6 +55,9 @@ class Entity {
 
 
 public class Main {
+    private static final Pattern FILE_COMPILED_PATTER = Pattern.compile("([0-9]+) (.*)");
+    private static final Pattern FOLDER_COMPILED_PATTER = Pattern.compile("\\$ cd (.*)");
+
     public static void main(String[] args) throws IOException {
         var root = new Entity(null, "/", true, 0);
         var currentFolder = root;
@@ -103,9 +106,7 @@ public class Main {
     }
 
     private static void extractFile(Entity currentFolder, String line) {
-        var filePattern = "([0-9]+) (.*)";
-        var fileCompiledPatter = Pattern.compile(filePattern);
-        var fileMatcher = fileCompiledPatter.matcher(line);
+        var fileMatcher = FILE_COMPILED_PATTER.matcher(line);
 
         if (fileMatcher.find()) {
             currentFolder.addFile(Integer.parseInt(fileMatcher.group(1)), fileMatcher.group(2));
@@ -113,9 +114,7 @@ public class Main {
     }
 
     private static Entity extractFolder(Entity currentFolder, String line) {
-        var folderPattern = "\\$ cd (.*)";
-        var folderCompiledPatter = Pattern.compile(folderPattern);
-        var folderMatcher = folderCompiledPatter.matcher(line);
+        var folderMatcher = FOLDER_COMPILED_PATTER.matcher(line);
 
         return folderMatcher.find() && !"/".equals(folderMatcher.group(1)) ? currentFolder.addChildOrReturnParentFolder(folderMatcher.group(1)) : null;
     }
