@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 class Position {
     public int x;
@@ -30,7 +29,7 @@ class Position {
             case TopRight -> new Position(this.x + 1, this.y + 1);
             case DownRight -> new Position(this.x + 1, this.y - 1);
             case DownLeft -> new Position(this.x - 1, this.y - 1);
-            case NoMove -> new Position(this.x , this.y);
+            case NoMove -> new Position(this.x, this.y);
         };
     }
 
